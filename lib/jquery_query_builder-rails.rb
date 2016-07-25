@@ -1,9 +1,8 @@
 require "jquery_query_builder/rails/version"
+require "jquery_query_builder/evaluator"
 
 module JqueryQueryBuilder
   module Rails
-    class Engine < ::Rails::Engine
-      # Get rails to add app, lib, vendor to load path
-    end
+    require 'jquery_query_builder/rails/engine' if defined?(::Rails)
   end
 end
