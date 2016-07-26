@@ -1,8 +1,8 @@
 module JqueryQueryBuilder
   module Operators
-    class In
+    class NotIn
       def evaluate(left, right)
-        !left.include?(right)
+        !right.include?(left)
       end
     end
   end

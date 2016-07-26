@@ -2,7 +2,7 @@ module JqueryQueryBuilder
   module Operators
     class NotBeginsWith
       def evaluate(left, right)
-        !left.starts_with?(right)
+        !left.start_with?(right)
       end
     end
   end
