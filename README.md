@@ -1,5 +1,11 @@
 # jQuery QueryBuilder - rails
 
+This gem has 2 parts.
+- [Assets needed for the jquery-query-builder plugin for the rails asset pipeline](#asset-pipeline-part)
+- [Ruby evaluator for the json rule output from jquery-query-builder](#ruby-rule-evaluator)
+
+# Asset Pipeline Part
+
 jquery_query_builer-rails wraps the [query-builder.js](http://querybuilder.js.org//) library
 and some of its dependencies in a rails engine for simple use with the asset pipeline provided by Rails 3.1 and higher.
 
@@ -51,6 +57,68 @@ After that you can use the QueryBuilder to any \<div\> you want.
 Read more here:
 [jQuery QueryBuilder](http://querybuilder.js.org//)
 
-Coming Soon:
+# Ruby Rule Evaluator
 
-Ruby evaluator for the json output.
+You can use the evaluator to check if objects match the json rules produced by the jQuery plugin.
+
+Objects are hashes or other objects that can be accessed with hash-like bracket functionality e.g. object['test'].
+
+## Example Usage
+```ruby
+rule_json = %|{
+  "condition": "AND",
+  "rules": [{
+    "id": "Integer_Question",
+    "field": "Integer_Question",
+    "type": "integer",
+    "input": "text",
+    "operator": "equal",
+    "value": "5"
+  }]
+}|
+
+object_1 = {'Integer_Question' => 5}
+object_2 = {'Integer_Question' => 15}
+objects = [object_1, object_2]
+
+evaluator = JqueryQueryBuilder::Evaluator.new(rule_json)
+evaluator.object_matches_rules?(object_1) #=> true
+evaluator.object_matches_rules?(object_2) #=> false
+
+evaluator.get_matching_objects(objects) #=> [object_1]
+```
+
+Note: For the constructor, you can pass in a JSON string or an already parsed object.
+
+## Operators
+
+All the default operators have been implemented.
+
+If you need to extend the operators with custom ones you have, just create a class for the operator.
+The class name should be the camelized version of the underscored operator.
+
+e.g. For the operator "equals_five" the class name should be "EqualsFive".
+
+The class must have an evaluate(input, value), even if a value is not required.
+
+e.g.
+```ruby
+# config/intializers/jquery_query_builder_operators.rb
+module JqueryQueryBuilder
+  module Operators
+    class EqualsFive
+      def evaluate(input, ignored_value)
+        input == 5
+      end
+    end
+  end
+end
+```
+
+## Contributing
+
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
