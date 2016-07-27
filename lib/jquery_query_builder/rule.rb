@@ -41,6 +41,8 @@ module JqueryQueryBuilder
     end
 
     def typecast_value(value_to_cast)
+      return nil if value_to_cast.nil?
+
       case type
         when 'string'
           value_to_cast.to_s

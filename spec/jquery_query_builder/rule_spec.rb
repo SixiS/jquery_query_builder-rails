@@ -51,18 +51,18 @@ describe JqueryQueryBuilder::Rule do
     end
     context 'input does not exist' do
       context 'base value' do
-        it 'returns the blank value for its type' do
+        it 'returns nil' do
           rule = JqueryQueryBuilder::Rule.new(decimal_rule)
           object = {}
-          expect(rule.get_input(object)).to eq(0)
+          expect(rule.get_input(object)).to eq(nil)
         end
       end
       context 'nested value' do
-        it 'returns the blank value for its type' do
+        it 'returns nil' do
           rule = JqueryQueryBuilder::Rule.new(decimal_rule)
           rule.field = 'fields.Decimal_Question'
           object = {}
-          expect(rule.get_input(object)).to eq(0)
+          expect(rule.get_input(object)).to eq(nil)
         end
       end
     end
