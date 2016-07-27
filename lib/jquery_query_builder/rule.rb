@@ -22,7 +22,7 @@ module JqueryQueryBuilder
       fields = field.split('.')
       result = object
       fields.each do |field|
-        result = object[field]
+        result = result[field]
         break if result.nil?
       end
       if result.is_a? Array

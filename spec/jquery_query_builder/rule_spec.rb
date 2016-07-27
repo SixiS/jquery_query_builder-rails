@@ -33,17 +33,37 @@ describe JqueryQueryBuilder::Rule do
 
   describe '#get_input' do
     context 'input exists' do
-      it 'returns the input value from the object' do
-        rule = JqueryQueryBuilder::Rule.new(decimal_rule)
-        object = {'Decimal_Question' => '1.3'}
-        expect(rule.get_input(object)).to eq(1.3)
+      context 'base value' do
+        it 'returns the input value from the object' do
+          rule = JqueryQueryBuilder::Rule.new(decimal_rule)
+          object = {'Decimal_Question' => '1.3'}
+          expect(rule.get_input(object)).to eq(1.3)
+        end
+      end
+      context 'nested value' do
+        it 'returns the nested input value from the object' do
+          rule = JqueryQueryBuilder::Rule.new(decimal_rule)
+          rule.field = 'fields.Decimal_Question'
+          object = {'fields' => {'Decimal_Question' => '1.3'}}
+          expect(rule.get_input(object)).to eq(1.3)
+        end
       end
     end
     context 'input does not exist' do
-      it 'returns the blank value for its type' do
-        rule = JqueryQueryBuilder::Rule.new(decimal_rule)
-        object = {}
-        expect(rule.get_input(object)).to eq(0)
+      context 'base value' do
+        it 'returns the blank value for its type' do
+          rule = JqueryQueryBuilder::Rule.new(decimal_rule)
+          object = {}
+          expect(rule.get_input(object)).to eq(0)
+        end
+      end
+      context 'nested value' do
+        it 'returns the blank value for its type' do
+          rule = JqueryQueryBuilder::Rule.new(decimal_rule)
+          rule.field = 'fields.Decimal_Question'
+          object = {}
+          expect(rule.get_input(object)).to eq(0)
+        end
       end
     end
   end

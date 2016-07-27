@@ -63,10 +63,13 @@ You can use the evaluator to check if objects match the json rules produced by t
 
 Objects are hashes or other objects that can be accessed with hash-like bracket functionality e.g. object['test'].
 
+You can access nested fields with a dot notation.
+e.g. fields.Question to access {'fields' => {'Question' => 'Answer'}}
+
 ## Example Usage
 ```ruby
 rule_json = %|{
-  "condition": "AND",
+  "condition": "OR",
   "rules": [{
     "id": "Integer_Question",
     "field": "Integer_Question",
@@ -74,10 +77,18 @@ rule_json = %|{
     "input": "text",
     "operator": "equal",
     "value": "5"
+  },
+  {
+    "id": "fields.String_Question",
+    "field": "fields.String_Question",
+    "type": "string",
+    "input": "text",
+    "operator": "equal",
+    "value": "test"
   }]
 }|
 
-object_1 = {'Integer_Question' => 5}
+object_1 = {'Integer_Question' => 5, 'fields' => {'String_Question' => 'test'}}
 object_2 = {'Integer_Question' => 15}
 objects = [object_1, object_2]
 
