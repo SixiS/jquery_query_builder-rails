@@ -1,5 +1,7 @@
 # jQuery QueryBuilder - rails
 
+Many thanks to [mistic100](https://github.com/mistic100) for the awesome jQuery plugin.
+
 This gem has 2 parts.
 - [Assets needed for the jquery-query-builder plugin for the rails asset pipeline](#asset-pipeline-part)
 - [Ruby evaluator for the json rule output from jquery-query-builder](#ruby-rule-evaluator)
@@ -117,6 +119,12 @@ e.g.
 # config/intializers/jquery_query_builder_operators.rb
 module JqueryQueryBuilder
   module Operators
+    class IsDivisibleBy
+      def evaluate(input, value)
+        input % value == 0
+      end
+    end
+    
     class EqualsFive
       def evaluate(input, ignored_value)
         input == 5
