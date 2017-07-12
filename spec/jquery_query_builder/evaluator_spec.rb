@@ -21,9 +21,9 @@ describe JqueryQueryBuilder::Evaluator do
       a = {one: 1}
       b = {two: 2}
       c = {three: 3}
-      evaluator.should_receive(:object_matches_rules?).with(a)
-      evaluator.should_receive(:object_matches_rules?).with(b)
-      evaluator.should_receive(:object_matches_rules?).with(c)
+      expect(evaluator).to receive(:object_matches_rules?).with(a)
+      expect(evaluator).to receive(:object_matches_rules?).with(b)
+      expect(evaluator).to receive(:object_matches_rules?).with(c)
       evaluator.get_matching_objects([a,b,c])
     end
   end
@@ -35,9 +35,9 @@ describe JqueryQueryBuilder::Evaluator do
 
       evaluator = JqueryQueryBuilder::Evaluator.new(rule_set)
       my_rule_group = JqueryQueryBuilder::RuleGroup.new(rule_set)
-      JqueryQueryBuilder::RuleGroup.should_receive(:new).with(rule_set).and_return(my_rule_group)
+      expect(JqueryQueryBuilder::RuleGroup).to receive(:new).with(rule_set).and_return(my_rule_group)
 
-      my_rule_group.should_receive(:evaluate).with(object_to_match)
+      expect(my_rule_group).to receive(:evaluate).with(object_to_match)
 
       evaluator.object_matches_rules?(object_to_match)
     end

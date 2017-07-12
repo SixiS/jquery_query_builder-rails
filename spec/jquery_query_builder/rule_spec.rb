@@ -71,7 +71,7 @@ describe JqueryQueryBuilder::Rule do
   describe '#get_value' do
     it 'returns the value typecasted based on its type' do
       rule = JqueryQueryBuilder::Rule.new(decimal_rule)
-      rule.should_receive(:typecast_value).with('1.2').once
+      expect(rule).to receive(:typecast_value).with('1.2').once
       rule.get_value
     end
   end
@@ -79,7 +79,7 @@ describe JqueryQueryBuilder::Rule do
   describe '#typecast_value' do
     it 'returns the value typecasted based on its type' do
       rule = JqueryQueryBuilder::Rule.new(decimal_rule)
-      rule.should_receive(:typecast_value).with('1.2').once
+      expect(rule).to receive(:typecast_value).with('1.2').once
       rule.get_value
     end
   end
@@ -94,9 +94,9 @@ describe JqueryQueryBuilder::Rule do
 
       object = {'Decimal_Question' => input}
 
-      rule.should_receive(:get_operator).and_return(operator)
-      rule.should_receive(:get_input).with(object).and_return(input)
-      rule.should_receive(:get_value).and_return(value)
+      expect(rule).to receive(:get_operator).and_return(operator)
+      expect(rule).to receive(:get_input).with(object).and_return(input)
+      expect(rule).to receive(:get_value).and_return(value)
 
       expect(rule.evaluate(object)).to eq(true)
     end
