@@ -2,11 +2,12 @@
 // 2011-2014, Laura Doktorova, https://github.com/olado/doT
 // Licensed under the MIT license.
 
-(function() {
+(function () {
   "use strict";
 
   var doT = {
-    version: "1.0.3",
+    name: "doT",
+    version: "1.1.1",
     templateSettings: {
       evaluate:    /\{\{([\s\S]+?(\}?)+)\}\}/g,
       interpolate: /\{\{=([\s\S]+?)\}\}/g,
@@ -24,7 +25,8 @@
       doNotSkipEncoded: false
     },
     template: undefined, //fn, compile template
-    compile:  undefined  //fn, for express
+    compile:  undefined, //fn, for express
+    log: true
   }, _globals;
 
   doT.encodeHTMLSource = function(doNotSkipEncoded) {
@@ -37,6 +39,7 @@
 
   _globals = (function(){ return this || (0,eval)("this"); }());
 
+  /* istanbul ignore else */
   if (typeof module !== "undefined" && module.exports) {
     module.exports = doT;
   } else if (typeof define === "function" && define.amd) {
@@ -129,6 +132,7 @@
     try {
       return new Function(c.varname, str);
     } catch (e) {
+      /* istanbul ignore else */
       if (typeof console !== "undefined") console.log("Could not create a template function: " + str);
       throw e;
     }
