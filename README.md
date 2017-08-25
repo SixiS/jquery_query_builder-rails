@@ -37,6 +37,11 @@ Add the following directive to your Javascript manifest file after jQuery (appli
     //= require doT
     //= require query-builder
 
+Optionally you can include i18n translations for use with the `lang_code` option ([see the docs](http://querybuilder.js.org/#lang)).
+
+    //= require i18n/query-builder.en.js
+    //= require i18n/query-builder.es.js
+
 Add the following directive to your Stylesheet manifest file (application.scss):
 
     @import "query-builder.default";
@@ -133,6 +138,11 @@ module JqueryQueryBuilder
   end
 end
 ```
+
+## Example
+
+You can view a basic example rails app that makes use of the gem here:
+[SixS/jquery_query_builder-rails_example-app](https://github.com/SixiS/jquery_query_builder-rails_example-app)
 
 ## Contributing
 
