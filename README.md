@@ -144,6 +144,9 @@ end
 You can view a basic example rails app that makes use of the gem here:
 [SixS/jquery_query_builder-rails_example-app](https://github.com/SixiS/jquery_query_builder-rails_example-app)
 
+## Thanks
+* [grfx1985](https://github.com/grfx1985)
+
 ## Contributing
 
 1. Fork it
