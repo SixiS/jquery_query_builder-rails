@@ -7,12 +7,31 @@ module JqueryQueryBuilder
     end
 
     def evaluate(object)
+      rule_matches = false
+      matched_rules = []
+      mismatched_rules = []
+
+      rules.each do |rule|
+        rule_result = get_rule_object(rule).evaluate(object)
+        if rule_result[:rule_matches] == true
+          matched_rules << {rule: rule, rule_result: rule_result}
+        else
+          mismatched_rules << {rule: rule, rule_result: rule_result}
+        end
+      end
+
       case condition
       when "AND"
-        rules.all?{|rule| get_rule_object(rule).evaluate(object) }
+        rule_matches = matched_rules.present? && mismatched_rules.blank?
       when "OR"
-        rules.any?{|rule| get_rule_object(rule).evaluate(object) }
+        rule_matches = matched_rules.any?
       end
+
+      {
+        rule_matches: rule_matches,
+        matched_rules: matched_rules,
+        mismatched_rules: mismatched_rules
+      }
     end
 
     def get_rule_object(rule)

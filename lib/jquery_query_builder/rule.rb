@@ -11,7 +11,9 @@ module JqueryQueryBuilder
     end
 
     def evaluate(object)
-      get_operator.evaluate(get_input(object), get_value)
+      {
+        rule_matches: get_operator.evaluate(get_input(object), get_value)
+      }
     end
 
     def get_operator

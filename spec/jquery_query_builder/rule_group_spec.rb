@@ -43,10 +43,12 @@ describe JqueryQueryBuilder::RuleGroup do
         })
       }
       it 'should returns true if all are true' do
-        expect(evaluator.evaluate({"Decimal_Question" => 1.2, "Yes_No_Question" => true})).to eq true
+        result = evaluator.evaluate({"Decimal_Question" => 1.2, "Yes_No_Question" => true})
+        expect(result[:rule_matches]).to eq true
       end
       it 'should return false if any are false' do
-        expect(evaluator.evaluate({"Decimal_Question" => 1.2, "Yes_No_Question" => false})).to eq false
+        result = evaluator.evaluate({"Decimal_Question" => 1.2, "Yes_No_Question" => false})
+        expect(result[:rule_matches]).to eq false
       end
     end
 
@@ -59,10 +61,12 @@ describe JqueryQueryBuilder::RuleGroup do
         })
       }
       it 'should returns true if any are true' do
-        expect(evaluator.evaluate({"Decimal_Question" => 1.5, "Yes_No_Question" => true})).to eq true
+        result = evaluator.evaluate({"Decimal_Question" => 1.5, "Yes_No_Question" => true})
+        expect(result[:rule_matches]).to eq true
       end
       it 'should return false if all are false' do
-        expect(evaluator.evaluate({"Decimal_Question" => 1.0, "Yes_No_Question" => false})).to eq false
+        result = evaluator.evaluate({"Decimal_Question" => 1.0, "Yes_No_Question" => false})
+        expect(result[:rule_matches]).to eq false
       end
     end
   end

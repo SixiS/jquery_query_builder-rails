@@ -8,7 +8,7 @@ require 'json'
 
 module JqueryQueryBuilder
   class Evaluator
-    attr_accessor :parsed_rule_set
+    attr_accessor :parsed_rule_set, :matched_rules, :mismatched_rules
     def initialize(rule_set)
       if rule_set.is_a? String
         #assuming the json was passed in
@@ -23,7 +23,10 @@ module JqueryQueryBuilder
     end
 
     def object_matches_rules?(object)
-      RuleGroup.new(parsed_rule_set).evaluate(object)
+      result = RuleGroup.new(parsed_rule_set).evaluate(object)
+      self.matched_rules = result[:matched_rules]
+      self.mismatched_rules = result[:mismatched_rules]
+      result[:rule_matches]
     end
   end
 end

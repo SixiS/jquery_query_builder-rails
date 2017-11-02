@@ -98,7 +98,7 @@ describe JqueryQueryBuilder::Rule do
       expect(rule).to receive(:get_input).with(object).and_return(input)
       expect(rule).to receive(:get_value).and_return(value)
 
-      expect(rule.evaluate(object)).to eq(true)
+      expect(rule.evaluate(object)).to eq({rule_matches: true})
     end
   end
 end

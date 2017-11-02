@@ -29,7 +29,7 @@ describe JqueryQueryBuilder::Evaluator do
   end
 
   describe '#object_matches_rules' do
-    it 'should create a new rule group and valuate it' do
+    it 'should create a new rule group and evaluate it' do
       rule_set = {}
       object_to_match = {}
 
@@ -37,7 +37,7 @@ describe JqueryQueryBuilder::Evaluator do
       my_rule_group = JqueryQueryBuilder::RuleGroup.new(rule_set)
       expect(JqueryQueryBuilder::RuleGroup).to receive(:new).with(rule_set).and_return(my_rule_group)
 
-      expect(my_rule_group).to receive(:evaluate).with(object_to_match)
+      expect(my_rule_group).to receive(:evaluate).with(object_to_match).and_return({})
 
       evaluator.object_matches_rules?(object_to_match)
     end
