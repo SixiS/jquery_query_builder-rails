@@ -146,6 +146,7 @@ You can view a basic example rails app that makes use of the gem here:
 
 ## Thanks
 * [grfx1985](https://github.com/grfx1985)
+* [jro](https://github.com/jro)
 
 ## Contributing
 
