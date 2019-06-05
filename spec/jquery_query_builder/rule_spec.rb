@@ -48,6 +48,22 @@ describe JqueryQueryBuilder::Rule do
           expect(rule.get_input(object)).to eq(1.3)
         end
       end
+      context 'array value' do
+        it 'returns the array value from the object' do
+          rule = JqueryQueryBuilder::Rule.new(decimal_rule)
+          rule.field = 'fields.Decimal_Question'
+          object = {'fields' => {'Decimal_Question' => ['1.3', '3.7']}}
+          expect(rule.get_input(object)).to eq([1.3, 3.7])
+        end
+      end
+      context 'nested value after array' do
+        it 'returns the nested input value from the object using the first item in the array' do
+          rule = JqueryQueryBuilder::Rule.new(decimal_rule)
+          rule.field = 'fields.Decimal_Group.Decimal_Question'
+          object = {'fields' => {'Decimal_Group' => [{'Decimal_Question' => '1.3'}, {'Decimal_Question' => '3.7'}]}}
+          expect(rule.get_input(object)).to eq(1.3)
+        end
+      end
     end
     context 'input does not exist' do
       context 'base value' do

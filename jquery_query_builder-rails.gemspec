@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "activesupport"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec", "~> 3.6.0"
+  spec.add_development_dependency "rspec"
   spec.add_development_dependency "rails", ">= 3.2.12"
   spec.add_development_dependency "pry"
 end
