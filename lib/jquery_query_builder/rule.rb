@@ -21,9 +21,11 @@ module JqueryQueryBuilder
     def get_input(object)
       fields = field.split('.')
       result = object
-      fields.each do |field|
+      steps = fields.length
+      fields.each_with_index do |field, i|
+        last_step = i == steps - 1
         result = result[field]
-        result = result.first if result.is_a? Array
+        result = result.first if(result.is_a?(Array) && !last_step)
         break if result.nil?
       end
       if result.is_a? Array
