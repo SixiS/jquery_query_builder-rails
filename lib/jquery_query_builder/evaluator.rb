@@ -25,6 +25,10 @@ module JqueryQueryBuilder
     def object_matches_rules?(object)
       RuleGroup.new(parsed_rule_set).evaluate(object)
     end
+
+    def sql_query
+      RuleGroup.new(parsed_rule_set).sql_query
+    end
   end
 end
 

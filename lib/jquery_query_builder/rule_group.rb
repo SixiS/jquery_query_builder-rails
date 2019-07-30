@@ -15,6 +15,22 @@ module JqueryQueryBuilder
       end
     end
 
+    def sql_query
+      queries = []
+      rules.each do |rule|
+        queries << get_rule_object(rule).sql_query
+      end
+
+      case condition
+      when "AND"
+        query = queries.join(' AND ')
+      when "OR"
+        query = queries.join(' OR ')
+      end
+
+      return query
+    end
+
     def get_rule_object(rule)
       if rule['rules'].present?
         RuleGroup.new(rule)

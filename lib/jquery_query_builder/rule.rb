@@ -14,6 +14,10 @@ module JqueryQueryBuilder
       get_operator.evaluate(get_input(object), get_value)
     end
 
+    def sql_query
+      get_operator.sql_query(self.id, get_value)
+    end
+
     def get_operator
       JqueryQueryBuilder::Operator.get_operator_class(operator).new
     end
