@@ -7,7 +7,7 @@ module JqueryQueryBuilder
 
       def sql_query(id, value)
         # sanitize_sql_for_conditions is made public in Rails 5.2
-        ApplicationRecord.send(:sanitize_sql_for_conditions, ["(#{id} NOT LIKE ?)", "%#{value}%"] )
+        ApplicationRecord.send(:sanitize_sql_for_conditions, ["(LOWER(#{id}) NOT LIKE LOWER(?))", "%#{value}%"] )
       end
     end
   end
