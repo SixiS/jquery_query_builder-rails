@@ -50,7 +50,7 @@ module JqueryQueryBuilder
         when "OR"
           query_string = queries.join(' OR ')
         end
-        query_string = "(#{query})"   # add parens for groups
+        query_string = "(#{query_string})"   # add parens for groups
       end
 
       return query_string
