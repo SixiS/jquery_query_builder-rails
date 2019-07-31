@@ -4,6 +4,10 @@ module JqueryQueryBuilder
       def evaluate(input, value)
         input.nil?
       end
+
+      def sql_query(id, value)
+        "(#{id} IS NULL)"
+      end
     end
   end
 end
