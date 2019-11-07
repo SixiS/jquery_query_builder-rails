@@ -16,7 +16,6 @@ Gem::Specification.new do |spec|
   spec.files = Dir["{lib,vendor}/**/*"] + ["LICENSE.txt", "CODE_OF_CONDUCT.md", "README.md"]
 
   spec.add_dependency "railties", ">= 3.1"
-  spec.add_dependency "json", ">= 1.8.3"
   spec.add_dependency "activesupport"
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
