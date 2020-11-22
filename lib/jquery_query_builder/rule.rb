@@ -1,17 +1,28 @@
 module JqueryQueryBuilder
   class Rule
-    attr_accessor :id, :field, :type, :input, :operator, :value
-    def initialize(rule_hash)
+    attr_accessor :id, :field, :type, :input, :operator, :value, :id_whitelist
+    def initialize(rule_hash, id_whitelist: nil)
       self.id = rule_hash['id']
       self.field = rule_hash['field']
       self.type = rule_hash['type']
       self.input = rule_hash['input']
       self.operator = rule_hash['operator']
       self.value = rule_hash['value']
+      self.id_whitelist = id_whitelist
+    end
+
+    def whitelisted?
+      return true unless id_whitelist.present?
+
+      id_whitelist.include?(self.id)
     end
 
     def evaluate(object)
       get_operator.evaluate(get_input(object), get_value)
+    end
+
+    def sql_query
+      get_operator.sql_query(self.id, get_value)
     end
 
     def get_operator

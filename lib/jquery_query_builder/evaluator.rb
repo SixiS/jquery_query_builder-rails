@@ -9,13 +9,18 @@ require 'json'
 module JqueryQueryBuilder
   class Evaluator
     attr_accessor :parsed_rule_set
-    def initialize(rule_set)
+    attr_accessor :id_whitelist
+
+    def initialize(rule_set, id_whitelist: nil)
       if rule_set.is_a? String
         #assuming the json was passed in
         self.parsed_rule_set = JSON.parse(rule_set)
       else
         self.parsed_rule_set = rule_set
       end
+
+      # whitelist of ids to restrict the rules to just those within the whitelist
+      self.id_whitelist = id_whitelist
     end
 
     def get_matching_objects(objects)
@@ -23,7 +28,11 @@ module JqueryQueryBuilder
     end
 
     def object_matches_rules?(object)
-      RuleGroup.new(parsed_rule_set).evaluate(object)
+      RuleGroup.new(parsed_rule_set, id_whitelist: id_whitelist).evaluate(object)
+    end
+
+    def sql_query
+      RuleGroup.new(parsed_rule_set, id_whitelist: id_whitelist).sql_query
     end
   end
 end
