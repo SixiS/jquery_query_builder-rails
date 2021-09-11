@@ -1,7 +1,10 @@
 require 'jquery_query_builder/evaluators/boolean'
 
 module JqueryQueryBuilder
-  class Evaluator < Evaluators::Boolean
+  class Evaluator
+    def initialize(rule_set, evaluator_class: Evaluators::Boolean)
+      evaluator_class.new(rule_set)
+    end
   end
 end
 

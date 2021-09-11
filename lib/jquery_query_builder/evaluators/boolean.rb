@@ -7,7 +7,7 @@ require 'jquery_query_builder/evaluators/boolean/rule'
 
 module JqueryQueryBuilder
   module Evaluators
-    class Boolean < JqueryQueryBuilder::Evaluator
+    class Boolean
       attr_accessor :parsed_rule_set
       def initialize(rule_set)
         if rule_set.is_a? String
