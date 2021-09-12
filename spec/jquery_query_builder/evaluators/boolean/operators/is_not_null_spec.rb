@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JqueryQueryBuilder::Operators::IsNotNull do
+describe JqueryQueryBuilder::Evaluators::Boolean::Operators::IsNotNull do
   describe '#evaluate' do
     context 'input is null' do
       it 'should return false' do

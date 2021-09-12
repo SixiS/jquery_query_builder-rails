@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JqueryQueryBuilder::Operator do
+describe JqueryQueryBuilder::Evaluators::Boolean::Operator do
   let(:decimal_rule){
     {
       'id' =>     "Decimal_Question",
@@ -24,8 +24,8 @@ describe JqueryQueryBuilder::Operator do
 
   describe '.get_operator_class' do
     it 'should return an operator class on the operator' do
-      expect(JqueryQueryBuilder::Operator.get_operator_class('equal').to_s).to eq('JqueryQueryBuilder::Operators::Equal')
-      expect(JqueryQueryBuilder::Operator.get_operator_class('not_equal').to_s).to eq('JqueryQueryBuilder::Operators::NotEqual')
+      expect(JqueryQueryBuilder::Evaluators::Boolean::Operator.get_operator_class('equal').to_s).to eq('JqueryQueryBuilder::Evaluators::Boolean::Operators::Equal')
+      expect(JqueryQueryBuilder::Evaluators::Boolean::Operator.get_operator_class('not_equal').to_s).to eq('JqueryQueryBuilder::Evaluators::Boolean::Operators::NotEqual')
     end
   end
 end

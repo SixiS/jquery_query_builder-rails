@@ -24,46 +24,14 @@ describe JqueryQueryBuilder::RuleGroup do
 
   describe '#new' do
     it 'should initialize a new rule group and get the conditions and rules' do
+      decimal_rule_object = JqueryQueryBuilder::Rule.new(decimal_rule)
+      expect(JqueryQueryBuilder::Rule).to receive(:new).with(decimal_rule).and_return(decimal_rule_object)
       evaluator = JqueryQueryBuilder::RuleGroup.new({
         'condition' => 'AND',
         'rules' => [decimal_rule]
       })
       expect(evaluator.condition).to eq('AND')
-      expect(evaluator.rules).to eq([decimal_rule])
-    end
-  end
-
-  describe '#evaluate' do
-    context 'AND' do
-      let(:rules){[decimal_rule, boolean_rule]}
-      let(:evaluator){
-        JqueryQueryBuilder::RuleGroup.new({
-          'condition' => 'AND',
-          'rules' => rules
-        })
-      }
-      it 'should returns true if all are true' do
-        expect(evaluator.evaluate({"Decimal_Question" => 1.2, "Yes_No_Question" => true})).to eq true
-      end
-      it 'should return false if any are false' do
-        expect(evaluator.evaluate({"Decimal_Question" => 1.2, "Yes_No_Question" => false})).to eq false
-      end
-    end
-
-    context 'OR' do
-      let(:rules){[decimal_rule, boolean_rule]}
-      let(:evaluator){
-        JqueryQueryBuilder::RuleGroup.new({
-          'condition' => 'OR',
-          'rules' => rules
-        })
-      }
-      it 'should returns true if any are true' do
-        expect(evaluator.evaluate({"Decimal_Question" => 1.5, "Yes_No_Question" => true})).to eq true
-      end
-      it 'should return false if all are false' do
-        expect(evaluator.evaluate({"Decimal_Question" => 1.0, "Yes_No_Question" => false})).to eq false
-      end
+      expect(evaluator.rules).to eq([decimal_rule_object])
     end
   end
 

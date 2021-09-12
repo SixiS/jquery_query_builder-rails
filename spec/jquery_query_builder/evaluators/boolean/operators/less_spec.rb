@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JqueryQueryBuilder::Operators::Less do
+describe JqueryQueryBuilder::Evaluators::Boolean::Operators::Less do
   describe '#evaluate' do
     context 'left greater than right' do
       it 'should return false' do

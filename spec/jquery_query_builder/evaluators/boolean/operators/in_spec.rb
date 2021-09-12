@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JqueryQueryBuilder::Operators::In do
+describe JqueryQueryBuilder::Evaluators::Boolean::Operators::In do
   describe '#evaluate' do
     context 'left is in right' do
       it 'should return true' do

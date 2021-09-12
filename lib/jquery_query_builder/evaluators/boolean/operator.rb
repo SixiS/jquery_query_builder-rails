@@ -21,7 +21,7 @@ module JqueryQueryBuilder
         end
 
         def self.operator_module
-          "JqueryQueryBuilder::Operators"
+          "JqueryQueryBuilder::Evaluators::Boolean::Operators"
         end
       end
     end

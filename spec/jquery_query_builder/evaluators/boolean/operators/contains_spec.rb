@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JqueryQueryBuilder::Operators::Contains do
+describe JqueryQueryBuilder::Evaluators::Boolean::Operators::Contains do
   describe '#evaluate' do
     context 'left contains right' do
       it 'should return true' do

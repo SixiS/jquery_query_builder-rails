@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JqueryQueryBuilder::Operators::NotBeginsWith do
+describe JqueryQueryBuilder::Evaluators::Boolean::Operators::NotBeginsWith do
   describe '#evaluate' do
     context 'left begins with right' do
       it 'should return false' do

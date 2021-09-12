@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JqueryQueryBuilder::Operators::NotBetween do
+describe JqueryQueryBuilder::Evaluators::Boolean::Operators::NotBetween do
   describe '#evaluate' do
     context 'input is between bounds' do
       it 'should return false' do

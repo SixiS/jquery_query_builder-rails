@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JqueryQueryBuilder::Operators::NotContains do
+describe JqueryQueryBuilder::Evaluators::Boolean::Operators::NotContains do
   describe '#evaluate' do
     context 'left contains right' do
       it 'should return false' do

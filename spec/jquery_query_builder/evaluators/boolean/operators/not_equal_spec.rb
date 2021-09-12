@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JqueryQueryBuilder::Operators::NotEqual do
+describe JqueryQueryBuilder::Evaluators::Boolean::Operators::NotEqual do
   describe '#evaluate' do
     context 'left equals right' do
       it 'should return false' do

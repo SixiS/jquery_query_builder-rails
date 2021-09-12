@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe JqueryQueryBuilder::Operators::NotEndsWith do
+describe JqueryQueryBuilder::Evaluators::Boolean::Operators::NotEndsWith do
   describe '#evaluate' do
     context 'left ends with right' do
       it 'should return false' do
