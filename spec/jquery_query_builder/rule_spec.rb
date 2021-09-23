@@ -24,13 +24,6 @@ describe JqueryQueryBuilder::Rule do
     end
   end
 
-  describe '#get_operator' do
-    it 'should get an operator based on type' do
-      rule = JqueryQueryBuilder::Rule.new(decimal_rule)
-      expect(rule.get_operator.class.to_s).to eq(JqueryQueryBuilder::Operators::Equal.to_s)
-    end
-  end
-
   describe '#get_input' do
     context 'input exists' do
       context 'base value' do
@@ -97,24 +90,6 @@ describe JqueryQueryBuilder::Rule do
       rule = JqueryQueryBuilder::Rule.new(decimal_rule)
       expect(rule).to receive(:typecast_value).with('1.2').once
       rule.get_value
-    end
-  end
-
-  describe '#evaluate' do
-    it 'should evaluate using the operator with the input+value' do
-      rule = JqueryQueryBuilder::Rule.new(decimal_rule)
-
-      operator = JqueryQueryBuilder::Operators::Equal.new
-      input = 1.2
-      value = 1.2
-
-      object = {'Decimal_Question' => input}
-
-      expect(rule).to receive(:get_operator).and_return(operator)
-      expect(rule).to receive(:get_input).with(object).and_return(input)
-      expect(rule).to receive(:get_value).and_return(value)
-
-      expect(rule.evaluate(object)).to eq(true)
     end
   end
 end

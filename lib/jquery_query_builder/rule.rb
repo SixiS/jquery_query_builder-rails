@@ -10,14 +10,6 @@ module JqueryQueryBuilder
       self.value = rule_hash['value']
     end
 
-    def evaluate(object)
-      get_operator.evaluate(get_input(object), get_value)
-    end
-
-    def get_operator
-      JqueryQueryBuilder::Operator.get_operator_class(operator).new
-    end
-
     def get_input(object)
       fields = field.split('.')
       result = object

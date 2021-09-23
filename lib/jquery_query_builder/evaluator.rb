@@ -1,30 +1,26 @@
-require 'active_support/core_ext/hash/indifferent_access'
-require 'active_support/core_ext/object/blank'
-require 'active_support/core_ext/string/inflections'
-require 'jquery_query_builder/operator'
-require 'jquery_query_builder/rule_group'
-require 'jquery_query_builder/rule'
 require 'json'
+require 'jquery_query_builder/rule'
+require 'jquery_query_builder/rule_group'
+require 'jquery_query_builder/evaluators/boolean/evaluator'
+require 'active_support/core_ext/module/delegation'
 
 module JqueryQueryBuilder
   class Evaluator
-    attr_accessor :parsed_rule_set
-    def initialize(rule_set)
-      if rule_set.is_a? String
+    attr_accessor :parsed_rule_set, :evaluator
+    def initialize(raw_rule_set, evaluator_class: Evaluators::Boolean::Evaluator)
+      if raw_rule_set.is_a? String
         #assuming the json was passed in
-        self.parsed_rule_set = JSON.parse(rule_set)
+        self.parsed_rule_set = JSON.parse(raw_rule_set)
       else
-        self.parsed_rule_set = rule_set
+        self.parsed_rule_set = raw_rule_set
       end
+
+      rule_set = RuleGroup.new(parsed_rule_set)
+      self.evaluator = evaluator_class.new(rule_set)
     end
 
-    def get_matching_objects(objects)
-      objects.select{|o| object_matches_rules?(o)}
-    end
-
-    def object_matches_rules?(object)
-      RuleGroup.new(parsed_rule_set).evaluate(object)
-    end
+    # All evaluators must implement
+    delegate :get_matching_objects, :object_matches_rules?, to: :evaluator
   end
 end
 
