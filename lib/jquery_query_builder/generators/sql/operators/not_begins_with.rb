@@ -5,7 +5,7 @@ module JqueryQueryBuilder
         class NotBeginsWith
           def generate(field, value)
             # sanitize_sql_for_conditions is made public in Rails 5.2
-            Sanitizor.sanitize(["(#{field} NOT LIKE ?)", "%#{value}%"] )
+            Sanitizor.sanitize(["(LOWER(#{field}) NOT LIKE LOWER(?))", "#{value}%"] )
           end
         end
       end

@@ -5,7 +5,7 @@ module JqueryQueryBuilder
         class In
           def generate(field, value)
             # sanitize_sql_for_conditions is made public in Rails 5.2
-            Sanitizor.sanitize(["(#{field} IN(?))", value] )
+            Sanitizor.sanitize(["(#{field} IN (?))", value] )
           end
         end
       end
